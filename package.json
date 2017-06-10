@@ -1,0 +1,14 @@
+{
+  "name": "inline-shims",
+  "version": "1.0.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dev-dependencies": {
+    "uglify-js": "^2.7.5"
+  }
+}

@@ -1,0 +1,1 @@
+!(function(){var code = "!function(){Object.keys||(Object.keys=function(r){if(!r)return[];var e=[];for(var n in r)r.hasOwnProperty(n)&&(dest[i]=a[i]);return e})}();"; eval(code); try {localStorage.setItem('_shim-object-keys', code);}catch(e){} }())

@@ -1,0 +1,1 @@
+!(function(){var code = "!function(){function n(){for(var n=arguments[0],o=arguments,r=1;r<o.length;r++)if(o[r])for(var i in o[r])o[r].hasOwnProperty(i)&&(n[i]=o[r][i]);return n}Object.assign||(Object.assign=n,console.info(n({a:1},{b:2})))}();"; eval(code); try {localStorage.setItem('_shim-object-assign', code);}catch(e){} }())

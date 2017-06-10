@@ -1,0 +1,1 @@
+!(function(){var code = "!function(){var n=0;window.requestAnimationFrame=function(e,i){var t=(new Date).getTime(),a=Math.max(0,16-(t-n)),o=window.setTimeout(function(){e(t+a)},a);return n=t+a,o},window.cancelAnimationFrame=function(n){clearTimeout(n)}}();"; eval(code); try {localStorage.setItem('_shim-raf', code);}catch(e){} }())
