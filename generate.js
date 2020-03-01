@@ -6,23 +6,19 @@ var UglifyJS = require('uglify-js');
 var files = fs.readdirSync(path.join(root, SHIM_DIR));
 
 var uglify = function (str) {
-  try {
-    debugger;
-    return UglifyJS.minify(str).code
-  } catch (e) {
-    return str;
-  }
+  const t = UglifyJS.minify(str);
+  if (t.error) throw t.error;
+  return t.code
 }
 
 var shimMap = files.reduce((o, f) => {
   content = fs.readFileSync(path.join(root, SHIM_DIR, f), 'utf8');
-  content = uglify(content);
   var name = shim_name(f);
   o[name] = o[name] || {};
   if (/.detect.js/.test(f)) {
-    o[name].detect = (`(function(){${content}}())`).split('\n').join(';');
+    o[name].detect = uglify(`(function(){${content}}())`);
   } else {
-    o[name].shim = (`!(function(){var code = ${JSON.stringify(content)}; eval(code); try {localStorage.setItem('_shim-${name}', code);}catch(e){} }())`);
+    o[name].shim = (`!(function(){var code = ${JSON.stringify(uglify(content))}; eval(code); try {localStorage.setItem('_shim-${name}', code);}catch(e){} }())`);
   }
   return o;
 }, {});
@@ -46,8 +42,9 @@ function shim_name(f) {
 function getBootstrapCode() {
   // detect code
   var keys = Object.keys(shimMap);
-  var detectCode = 'window.$$SHIM_SUPPORT = {};' +
-    keys.map(k => `window.$$SHIM_SUPPORT['${k}'] = ${shimMap[k].detect};`).join('');
+  var detectCode = 'window.__SHIM_SUPPORT = {};' +
+    keys.map(k => `window.__SHIM_SUPPORT['${k}'] = ${shimMap[k].detect};`).join('');
+  debugger;
   var detectFn = `function detect() { ${detectCode} }`
 
   // load from localstorage
@@ -55,7 +52,7 @@ function getBootstrapCode() {
     ;(function () {
       detect();
       if (typeof localStorage == 'undefined') return;
-      var s = window.$$SHIM_SUPPORT;
+      var s = window.__SHIM_SUPPORT;
       var unsupported = [];
       for (var k in s) {
         if (!s.hasOwnProperty(k)) continue;
@@ -77,7 +74,7 @@ function getBootstrapCode() {
 fs.writeFileSync(path.join(root, 'utils', 'bootstrap.js'), getBootstrapCode());
 fs.writeFileSync(path.join(root, 'utils', '_combo_get.js'), uglify(`
 !(function(){
-    var s = window.$$SHIM_SUPPORT;
+    var s = window.__SHIM_SUPPORT;
     var unsupported = [];
     for (var k in s) {
       if (!s.hasOwnProperty(k)) continue;
