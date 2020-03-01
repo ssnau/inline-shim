@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node generate"
   },
   "author": "",
   "license": "ISC",
   "dev-dependencies": {
     "uglify-js": "^2.7.5"
+  },
+  "dependencies": {
+    "uglify-js": "^3.8.0"
   }
 }

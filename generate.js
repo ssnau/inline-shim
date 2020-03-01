@@ -7,9 +7,8 @@ var files = fs.readdirSync(path.join(root, SHIM_DIR));
 
 var uglify = function (str) {
   try {
-    return UglifyJS.minify(str, {
-      fromString: true
-    }).code
+    debugger;
+    return UglifyJS.minify(str).code
   } catch (e) {
     return str;
   }
@@ -54,7 +53,6 @@ function getBootstrapCode() {
   // load from localstorage
   var loadCode = `
     ;(function () {
-      debugger;
       detect();
       if (typeof localStorage == 'undefined') return;
       var s = window.$$SHIM_SUPPORT;

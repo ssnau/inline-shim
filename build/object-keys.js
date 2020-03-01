@@ -1,1 +1,1 @@
-!(function(){var code = "!function(){Object.keys||(Object.keys=function(r){if(!r)return[];var e=[];for(var n in r)r.hasOwnProperty(n)&&(dest[i]=a[i]);return e})}();"; eval(code); try {localStorage.setItem('_shim-object-keys', code);}catch(e){} }())
+!(function(){var code = "Object.keys||(Object.keys=function(e){if(!e)return[];for(var r in e)e.hasOwnProperty(r)&&(dest[i]=a[i]);return[]});"; eval(code); try {localStorage.setItem('_shim-object-keys', code);}catch(e){} }())

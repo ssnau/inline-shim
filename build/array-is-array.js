@@ -1,1 +1,1 @@
-!(function(){var code = "!function(){Array.isArray||(Array.isArray=function(r){return\"[object Array]\"===Object.prototype.toString.call(r)})}();"; eval(code); try {localStorage.setItem('_shim-array-is-array', code);}catch(e){} }())
+!(function(){var code = "Array.isArray||(Array.isArray=function(r){return\"[object Array]\"===Object.prototype.toString.call(r)});"; eval(code); try {localStorage.setItem('_shim-array-is-array', code);}catch(e){} }())
